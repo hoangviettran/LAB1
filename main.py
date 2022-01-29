@@ -5,6 +5,9 @@ import json
 import geocoder
 import folium
 import requests
+import json
+import random
+
 
 BROKER_ADDRESS = "demo.thingsboard.io"
 PORT = 1883
@@ -56,8 +59,8 @@ while True:
     longitude = g.lng
     latitude = g.lat
     collect_data = {'temperature': temp, 'humidity': humi, 'light':light_intensity, 'longitude': longitude, 'latitude': latitude}
-    temp += 1
-    humi += 1
-    light_intensity += 1
+    temp = random.randint(0, 100)
+    humi = random.randint(0, 9)
+    light_intensity = random.randint(0, 800)
     client.publish('v1/devices/me/telemetry', json.dumps(collect_data), 1)
     time.sleep(10)
